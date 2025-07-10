@@ -41,7 +41,7 @@ final class MessageBirdTransport extends AbstractTransport
 
     public function __toString(): string
     {
-        return sprintf('messagebird://%s?from=%s', $this->getEndpoint(), $this->from);
+        return \sprintf('messagebird://%s?from=%s', $this->getEndpoint(), $this->from);
     }
 
     public function supports(MessageInterface $message): bool
@@ -60,7 +60,7 @@ final class MessageBirdTransport extends AbstractTransport
         $options['recipients'] = [$message->getPhone()];
         $options['body'] = $message->getSubject();
 
-        $endpoint = sprintf('https://%s/messages', $this->getEndpoint());
+        $endpoint = \sprintf('https://%s/messages', $this->getEndpoint());
         $response = $this->client->request('POST', $endpoint, [
             'auth_basic' => ['AccessKey', $this->token],
             'body' => array_filter($options),
